@@ -1,0 +1,25 @@
+import qrcode
+
+# Dados para codificar (as URLs para os seus PDFs no Google Drive)
+urls = [
+    "https://drive.google.com/file/d/1dgACmlB-Vv74OTyjKK_3NzzWYt5LogHQ/view?usp=sharing",
+    "https://drive.google.com/file/d/1x1uekyBMgI8_5fiOfFlwZ40kLT_y5ps6/view?usp=sharing",
+    "https://drive.google.com/file/d/1d8CXXJZOske_zw7cDLUwsgyGvS8asRJd/view?usp=sharing"
+]
+
+for i, url in enumerate(urls):
+    # Crie uma instância QRCode
+    qr = qrcode.QRCode(
+        version=1,
+        error_correction=qrcode.constants.ERROR_CORRECT_H,
+        box_size=10,
+        border=4,
+    )
+
+    # Adicione dados
+    qr.add_data(url)
+    qr.make(fit=True)
+
+    # Crie uma imagem e salve-a
+    img = qr.make_image(fill_color="black", back_color="white")
+    img.save(f"qrcode_{i}.png")
